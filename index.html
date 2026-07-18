@@ -1,107 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Civil Engineer Portfolio</title>
-  <style>
-    body { margin:0; font-family: Arial, sans-serif; line-height:1.6; }
-    header { background:#1f3a5f; color:white; padding:20px; text-align:center; }
-    nav { background:#16324f; padding:10px; text-align:center; }
-    nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
-    section { padding:40px; }
-    .container { max-width:1000px; margin:auto; }
-    .projects { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
-    .card { border:1px solid #ddd; padding:20px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-    footer { background:#1f3a5f; color:white; text-align:center; padding:20px; }
-    button { padding:10px 20px; border:none; background:#1f3a5f; color:white; cursor:pointer; border-radius:5px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brenda Masakha — Civil Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:      #1f3a5f;
+  --navy-dark: #16324f;
+  --navy-deep: #0e2136;
+  --gold:      #c8a84b;
+  --white:     #ffffff;
+  --off:       #f5f7fa;
+  --border:    #dde3ed;
+  --text:      #1a2533;
+  --muted:     #5a6a7e;
+  --radius:    8px;
+  --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+body {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--white);
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ── Sticky nav ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy-dark);
+  border-bottom: 2px solid var(--gold);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 62px;
+}
+
+.nav-brand {
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+.nav-brand span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,.80);
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transition: color .2s, background .2s;
+}
+.nav-links a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,.10);
+}
+
+/* ── Hero / Header ── */
+.hero {
+  background: linear-gradient(145deg, var(--navy-deep) 0%, var(--navy) 55%, #2a4d73 100%);
+  padding: 72px 32px 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle grid overlay */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+}
+
+.hero-text { max-width: 600px; }
+
+.hero-eyebrow {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  color: var(--white);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -.02em;
+}
+
+.hero-roles {
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: .01em;
+}
+
+.hero p {
+  color: rgba(255,255,255,.78);
+  font-size: 15.5px;
+  line-height: 1.75;
+  max-width: 52ch;
+  margin-bottom: 32px;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform .18s, box-shadow .18s, background .18s, color .18s, border-color .18s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.18); }
+
+.btn-gold   { background: var(--gold);  color: var(--navy-deep); border-color: var(--gold); }
+.btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.45); }
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+.btn-navy { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.btn-navy:hover { background: var(--navy-dark); }
+
+/* ── Profile image ── */
+.profile-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-ring {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  padding: 5px;
+  background: conic-gradient(var(--gold) 0deg 240deg, rgba(255,255,255,.15) 240deg 360deg);
+  box-shadow: 0 16px 48px rgba(0,0,0,.35);
+}
+
+.profile-ring-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--navy-dark);
+  border: 3px solid var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-ring-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* initials fallback */
+.profile-initials {
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -.02em;
+  user-select: none;
+}
+
+.profile-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+
+/* ── Shared section layout ── */
+.section {
+  padding: 76px 32px;
+}
+
+.section:nth-child(even) { background: var(--off); }
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 44px;
+}
+
+.section-header h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+.section-rule {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, var(--navy), transparent);
+  border-radius: 2px;
+  opacity: .15;
+}
+
+/* ── About ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--muted);
+  font-size: 15.5px;
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.about-text p:last-child { margin-bottom: 0; }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  transition: border-color .2s, transform .2s;
+}
+
+.stat-card:hover { border-color: var(--navy); transform: translateY(-2px); }
+
+.stat-card .num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-card .label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+/* ── Projects ── */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow .22s, transform .22s, border-color .22s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(31,58,95,.12);
+  border-color: var(--navy);
+}
+
+.card-thumb {
+  height: 186px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.card:hover .card-thumb img { transform: scale(1.04); }
+
+/* icon placeholder when no image */
+.card-icon {
+  font-size: 48px;
+  opacity: .35;
+}
+
+.card-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.card-body { padding: 24px; }
+
+.card-body h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.card-body p {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── Services ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.service-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--navy);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: box-shadow .2s, transform .2s;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(31,58,95,.10);
+}
+
+.service-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.service-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── Software ── */
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.sw-chip {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  transition: border-color .2s, background .2s, transform .2s;
+  cursor: default;
+}
+
+.sw-chip:hover {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ── Gallery / image section ── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+
+.gallery-item {
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  background: var(--navy);
+}
+
+.gallery-item.featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease, opacity .3s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+  opacity: .85;
+}
+
+.gallery-item .img-placeholder {
+  width: 100%;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: rgba(255,255,255,.35);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.gallery-item.featured .img-placeholder { min-height: 360px; }
+.gallery-item:not(.featured) .img-placeholder { min-height: 170px; }
+
+.img-placeholder svg { opacity: .25; }
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 28px 18px 16px;
+  background: linear-gradient(to top, rgba(14,33,54,.85) 0%, transparent 100%);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  transform: translateY(4px);
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+}
+
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-note {
+  margin-top: 18px;
+  font-size: 13.5px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── Contact ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.contact-intro h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.contact-intro p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-detail:first-of-type { border-top: 1px solid var(--border); }
+
+.c-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.c-info .k {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  color: var(--muted);
+  margin-bottom: 1px;
+}
+
+.c-info a, .c-info span {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--navy);
+  word-break: break-all;
+}
+
+.c-info a:hover { color: var(--gold); text-decoration: underline; }
+
+/* ── Footer ── */
+footer {
+  background: var(--navy-deep);
+  color: rgba(255,255,255,.55);
+  text-align: center;
+  padding: 28px 32px;
+  font-size: 14px;
+}
+
+footer span { color: var(--gold); font-weight: 600; }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .profile-wrap { display: none; }        /* collapsed: hero already shows name */
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .gallery-item.featured { grid-column: span 2; grid-row: span 1; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 52px 20px; }
+  nav .nav-inner { padding: 0 16px; }
+  .hero { padding: 52px 20px 44px; }
+  .nav-links a { font-size: 12px; padding: 5px 10px; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item.featured { grid-column: span 1; }
+}
+
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Brenda Masakha</h1>
-  <p>Civil Engineer | BIM Specialist | Infrastructure Designer</p>
-</header>
-
+<!-- ── Sticky nav ── -->
 <nav>
-  <a href="#about">About</a>
-  <a href="#projects">Projects</a>
-  <a href="#services">Services</a>
-  <a href="#contact">Contact</a>
+  <div class="nav-inner">
+    <div class="nav-brand">Brenda <span>Masakha</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 </nav>
 
-<section id="about">
-  <div class="container">
-    <h2>About Me</h2>
-    <p>I am a professional civil engineer specializing in road design, drainage systems, and BIM coordination. I use modern tools to deliver efficient and sustainable infrastructure solutions.</p>
-  </div>
-</section>
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-eyebrow">Civil Engineer · Nairobi, Kenya</span>
+      <h1>Brenda Masakha</h1>
+      <p class="hero-roles">BIM Specialist &nbsp;·&nbsp; Infrastructure Designer &nbsp;·&nbsp; Road &amp; Drainage Engineer</p>
+      <p>I design infrastructure that holds up — from geometric road alignments and stormwater drainage to full BIM coordination across multi-discipline teams. I work from survey data through to construction-ready drawings.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="#projects">View Projects</a>
+        <a class="btn btn-outline" href="BRENDAMASAKHA026CV.pdf" download>Download CV</a>
+      </div>
+    </div>
 
-<section id="projects">
-  <div class="container">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="card">
-        <h3>Road Design Project</h3>
-        <p>Designed a complete road alignment including profiles and cross-sections.</p>
+    <!-- Profile image — using profile.png from workspace -->
+    <div class="profile-wrap">
+      <div class="profile-ring">
+        <div class="profile-ring-inner">
+          <!-- swap src to your actual photo; initials show as fallback -->
+          <img src="profile.png" alt="Portrait of Brenda Masakha"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="profile-initials" style="display:none">BM</div>
+        </div>
       </div>
-      <div class="card">
-        <h3>Drainage System</h3>
-        <p>Stormwater drainage design with hydraulic analysis and BOQ.</p>
+      <div class="profile-badge">Available for hire</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── About ── -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>About Me</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a professional civil engineer specialising in road design, drainage systems and BIM coordination. I use modern tools to deliver efficient, sustainable infrastructure solutions that work in the model and in the ground.</p>
+        <p>My focus is on buildable designs — alignments a contractor can set out from, hydraulics that survive the first real storm, and quantities that hold up when the bills are priced. BIM coordination is part of how I ensure the road, drainage and structural disciplines agree before anything is poured.</p>
       </div>
-      <div class="card">
-        <h3>BIM Coordination</h3>
-        <p>Clash detection and coordination using BIM tools.</p>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="num">5+</div>
+          <div class="label">Years experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">15+</div>
+          <div class="label">Projects delivered</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">7</div>
+          <div class="label">Software tools</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">3</div>
+          <div class="label">Disciplines</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="services">
-  <div class="container">
-    <h2>Services</h2>
-    <ul>
-      <li>Road Design</li>
-      <li>Drainage Design</li>
-      <li>BIM Modeling & Coordination</li>
-      <li>Quantity Takeoff & BOQ</li>
-    </ul>
+<!-- ── Projects ── -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Projects</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="project-grid">
+
+      <article class="card">
+        <div class="card-thumb">
+          <!-- Replace with actual project image: <img src="project-road.jpg" alt="Road design project"> -->
+          <div class="card-icon">🛣️</div>
+          <span class="card-tag">Roads</span>
+        </div>
+        <div class="card-body">
+          <h3>Road Design &amp; Alignment</h3>
+          <p>Complete road alignment including horizontal and vertical profiles, cross-sections and corridor models — developed from raw survey data to issued-for-construction drawings.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-thumb">
+          <div class="card-icon">🌊</div>
+          <span class="card-tag">Drainage</span>
+        </div>
+        <div class="card-body">
+          <h3>Stormwater Drainage System</h3>
+          <p>Stormwater drainage network design with full hydraulic analysis, culvert and channel sizing, and measured bill of quantities for pricing.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-thumb">
+          <div class="card-icon">🏗️</div>
+          <span class="card-tag">BIM</span>
+        </div>
+        <div class="card-body">
+          <h3>BIM Coordination</h3>
+          <p>Multi-discipline model federation, systematic clash detection and coordination issue tracking from first run through to resolution sign-off.</p>
+        </div>
+      </article>
+
+    </div>
   </div>
 </section>
 
-<section id="software">
-  <div class="container">
-    <h2>Software Proficiency</h2>
-    <ul>
-      <li>Civil 3D</li>
-      <li>Revit</li>
-      <li>Trimble Business Center</li>
-      <li>Navisworks</li>
-      <li>Bluebeam</li>
-      <li>Infrakit</li>
-      <li>costx</li>
-      <li>3D Win</li>
-    </ul>
+<!-- ── Gallery ── -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Work Gallery</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="gallery-grid">
+
+      <!-- Featured image (large, 2×2) — replace src with your best project image -->
+      <div class="gallery-item featured">
+        <div class="img-placeholder">
+          <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+          Add featured project image
+        </div>
+        <!-- <img src="gallery-featured.jpg" alt="Featured project — road design"> -->
+        <div class="gallery-caption">Road alignment corridor — Northern bypass</div>
+      </div>
+
+      <!-- Top-right -->
+      <div class="gallery-item">
+        <div class="img-placeholder">
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+          Image 2
+        </div>
+        <!-- <img src="gallery-2.jpg" alt="Drainage system design"> -->
+        <div class="gallery-caption">Stormwater drainage — culvert detail</div>
+      </div>
+
+      <!-- Bottom-right -->
+      <div class="gallery-item">
+        <div class="img-placeholder">
+          <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="m21 15-5-5L5 21"/>
+          </svg>
+          Image 3
+        </div>
+        <!-- <img src="gallery-3.jpg" alt="BIM model coordination"> -->
+        <div class="gallery-caption">BIM clash detection — federated model</div>
+      </div>
+
+    </div>
+
+    <p class="gallery-note">
+      To add your images: place photo files next to this HTML file, then uncomment the <code>&lt;img&gt;</code> tags above and remove the placeholder divs.
+    </p>
   </div>
 </section>
 
-<section id="contact">
-  <div class="container">
-    <h2>Contact</h2>
-    <p>Email: masakhabrenda1@gmail.com</p>
-    <p>LinkedIn: https://www.linkedin.com/in/brenda-masakha-82755641a/</p>
-    <p>Phone: +254113790740</p>
-    <a href="BRENDAMASAKHA026CV.pdf" download>
-      <button>Download CV</button>
-    </a>
-    <br><br>
-    <button onclick="alert('Email sent!')">Send Message</button>
+<!-- ── Services ── -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Services</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🛣️</div>
+        <h3>Road Design</h3>
+        <p>Geometric design of alignments, profiles and cross-sections from survey data through to IFC drawings.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌧️</div>
+        <h3>Drainage Design</h3>
+        <p>Hydraulic analysis, network sizing, culvert and channel design with full stormwater management reports.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏗️</div>
+        <h3>BIM Modelling &amp; Coordination</h3>
+        <p>Multi-discipline BIM models, federation, clash detection and coordination reporting through to resolution.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Quantity Take-off &amp; BOQ</h3>
+        <p>Accurate measurement, pricing schedules and cost reports extracted directly from model or drawings.</p>
+      </div>
+
+    </div>
   </div>
 </section>
 
+<!-- ── Software ── -->
+<section class="section" id="software">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Software Proficiency</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="software-grid">
+      <div class="sw-chip">Civil 3D</div>
+      <div class="sw-chip">Revit</div>
+      <div class="sw-chip">Trimble Business Center</div>
+      <div class="sw-chip">Navisworks</div>
+      <div class="sw-chip">Bluebeam</div>
+      <div class="sw-chip">Infrakit</div>
+      <div class="sw-chip">CostX</div>
+      <div class="sw-chip">3D-Win</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-header">
+      <h2>Contact</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-intro">
+        <h3>Let's work together</h3>
+        <p>Open to project work, roles, or collaborations in road design, drainage and BIM coordination. Send a message and I'll get back to you.</p>
+        <a class="btn btn-navy" href="mailto:masakhabrenda1@gmail.com?subject=Project%20enquiry">Send a Message</a>
+        &nbsp;
+        <a class="btn btn-outline" href="BRENDAMASAKHA026CV.pdf" download
+           style="color:var(--navy); border-color:var(--border);">Download CV</a>
+      </div>
+
+      <div>
+        <div class="contact-detail">
+          <div class="c-icon">✉️</div>
+          <div class="c-info">
+            <div class="k">Email</div>
+            <a href="mailto:masakhabrenda1@gmail.com">masakhabrenda1@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon">📞</div>
+          <div class="c-info">
+            <div class="k">Phone</div>
+            <a href="tel:+254113790740">+254 113 790 740</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="c-icon">💼</div>
+          <div class="c-info">
+            <div class="k">LinkedIn</div>
+            <a href="https://www.linkedin.com/in/brenda-masakha-82755641a/" target="_blank" rel="noopener">linkedin.com/in/brenda-masakha-82755641a</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
 <footer>
-  <p>© 2026 Brenda Masakha | Civil Engineer</p>
+  <p>© 2026 <span>Brenda Masakha</span> &nbsp;·&nbsp; Civil Engineer &nbsp;·&nbsp; Nairobi, Kenya</p>
 </footer>
 
 </body>
